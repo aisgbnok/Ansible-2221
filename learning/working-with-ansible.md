@@ -53,7 +53,7 @@ ansible localhost -m find -a "paths=Downloads file_type=file"
         name: stress
         state: present
 ```
-To run an ansible playbook:
+To run an Ansible playbook:
 ```shell
 ansible-playbook first.yml
 ```

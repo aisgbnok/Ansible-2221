@@ -20,12 +20,12 @@ Thanks to plugins we can also dynamically generate inventories.
 Easy to learn.
 Ansible is written in Python, which is good.
 
-One of the biggest advantages of ansible is that it is agentless.
+One of the biggest advantages of Ansible is that it is agentless.
 You don't have to install an agent on each node you want to manage.
 
 Critical components like Playbooks are written in YAML.
 
 Ansible is used by many individuals, so it has a large community of individuals that have probably already worked through things you might be struggling with.
 
-An Ansible role is something that was developed by the community to execute within the ansible environment things you want to do to your nodes.
+An Ansible role is something that was developed by the community to execute within the Ansible environment things you want to do to your nodes.
 

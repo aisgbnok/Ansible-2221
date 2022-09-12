@@ -368,7 +368,7 @@ We also have the `when` statement that ensures we only run when the `item.value.
 ## Testing plays with check mode
 
 - We often find ourselves testing things against actual equipment.
-  - This isn't ideal or very good. Even though ansible is safe/idempotent.
+  - This isn't ideal or very good. Even though Ansible is safe/idempotent.
 - Instead, we can take advantage of the check mode with Ansible for testing.
 - However, this won't work if actual access to remote devices is required to test.
 

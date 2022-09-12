@@ -2,26 +2,26 @@
 
 ## Ansible Structure
 
-The ansible control node is the system that has ansible installed and manages other nodes.
+The Ansible control node is the system that has Ansible installed and manages other nodes.
 
-You need to have an ansible inventory.
-The ansible inventory file is by default the `hosts` file found at `/etc/ansible/hosts`.
+You need to have an Ansible inventory.
+The Ansible inventory file is by default the `hosts` file found at `/etc/ansible/hosts`.
 
 The `ansible.cfg` file is an important file.
-It includes a bunch of parameters and configurations for modifying the default ansible behavior.
+It includes a bunch of parameters and configurations for modifying the default Ansible behavior.
 
-Ansible playbooks are basically ansible scripts.
+Ansible playbooks are basically Ansible scripts.
 They are written in YAML.
 They contain some basic data for defining the playbook, and then they include tasks that execute on the specified nodes.
 
 
-To run an ansible playbook:
+To run an Ansible playbook:
 
 ```shell
 ansible-playbook sample.yml
 ```
 
-An ad hoc ansible command can be performed whenever you want:
+An ad hoc Ansible command can be performed whenever you want:
 
 ```shell
 ansible myservers -m ping
@@ -49,7 +49,7 @@ python3 -m pip install --user ansible
 ```
 
 > **Note**\
-> Must add ansible `~/.local/bin` to your `$PATH` env var.
+> Must add Ansible `~/.local/bin` to your `$PATH` env var.
 > https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
 
 ```shell
