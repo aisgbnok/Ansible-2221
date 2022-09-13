@@ -26,12 +26,7 @@ This is done in a number of ways including participating in three in-house cyber
 
 [//]: # (Each directory has a readme to explain its purpose in more detail.)
 
-## License & Contribution
+## License
 
-The goal of this project is to provide a place to organize my journey of learning the Ansible platform;
-however, contributions are welcome!
-
-While not explicitly enforced, it is preferred to keep this software and anything emanated from it open for others.
-Providing adequate attribution is highly requested.
-Keeping that in mind, this software is licensed under the [MIT license](LICENSE.md).
-Thanks!
+The goal of this project is to provide a space for myself to organize my journey of learning the Ansible platform.
+This repository is unlicensed and owned by Anthony Swierkosz.
