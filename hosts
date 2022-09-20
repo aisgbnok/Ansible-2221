@@ -1,5 +1,5 @@
 [iisserver]
-winserver ansible_host=169.254.82.229
+winserver ansible_host=10.0.56.10
 [iisserver:vars]
 ansible_user=Administrator
 ansible_password=Student123
