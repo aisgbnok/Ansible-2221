@@ -24,7 +24,7 @@
 
     - name: Copy Website Over
       ansible.windows.win_copy:
-        src: files/minecraft_server
+        src: minecraft_server
         dest: C:\sites
 
     - name: Minecraft Hosting IIS site
