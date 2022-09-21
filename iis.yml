@@ -15,9 +15,9 @@
         state: present
         include_sub_features: yes
         include_management_tools: yes
-      register: web_server
+      register: win_feature
 
     # Reboot the system if the new feature needs a reboot to work
     - name: Reboot If Required
       ansible.windows.win_reboot:
-        when: web_server.reboot_required
+      when: win_feature.reboot_required
