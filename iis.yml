@@ -1,23 +1,23 @@
 ---
 - name: Install IIS on Windows Server
-  hosts: iisserver
-  #gather_facts: true
+  hosts: iisservers
 
   tasks:
+
+    - name: Test Reachability
+      ansible.windows.win_ping:
+
     # Install the IIS Web-Server feature
     # Include sub features and the management tools
-    - name: Test PING
-      ansible.builtin.ping:
-      
-  # - name:  Install IIS
-  #   win_feature:
-  #     name: Web-Server
-  #     state: present
-  #     include_sub_features: yes
-  #     include_management_tools: yes
-  #   register: web_server # Create Variable `web-server` from the result
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+        include_sub_features: yes
+        include_management_tools: yes
+      register: web_server
 
-  #   # Reboot the system if the new feature needs a reboot to work
-  # - name: Reboot If Required
-  #   win_reboot:
-  #     when: web_server.reboot_required
+    # Reboot the system if the new feature needs a reboot to work
+    - name: Reboot If Required
+      ansible.windows.win_reboot:
+        when: web_server.reboot_required
