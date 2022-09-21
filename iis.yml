@@ -32,7 +32,7 @@
         name: Minecraft Hosting
         state: started
         port: 80
-        ip: 127.0.0.1
+        ip: '*'
         hostname: minecraft.local
         application_pool: minecraft-hosting
         physical_path: C:\sites\minecraft_server
