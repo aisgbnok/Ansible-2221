@@ -30,10 +30,9 @@
     - name: Add Minecraft Hosting site to IIS
       community.windows.win_iis_website:
         name: Minecraft Hosting
-        state: started
+        state: restarted
         port: 80
         ip: '*'
-        hostname: '*'
         application_pool: Minecraft Hosting
         physical_path: C:\sites\minecraft_server
         parameters: logfile.directory:C:\sites\logs
