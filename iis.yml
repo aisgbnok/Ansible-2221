@@ -33,6 +33,7 @@
         state: restarted
         port: 80
         ip: '*'
+        hostname: ''
         application_pool: Minecraft Hosting
         physical_path: C:\sites\minecraft_server
         parameters: logfile.directory:C:\sites\logs
