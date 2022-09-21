@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[826],{307:(e,u,c)=>{var n=c(690),t=c(817);new t.K(document.querySelector("#name")),new t.K(document.querySelector("#email")),new n.F(document.querySelector("#submit"))}},e=>{e.O(0,[216],(()=>(307,e(e.s=307)))),e.O()}]);
+//# sourceMappingURL=index.152f1a98c480786fa082.js.map
