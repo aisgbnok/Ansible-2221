@@ -33,7 +33,6 @@
         state: started
         port: 80
         ip: '*'
-        hostname: minecraft.local
         application_pool: minecraft-hosting
         physical_path: C:\sites\minecraft_server
         parameters: logfile.directory:C:\sites\logs
