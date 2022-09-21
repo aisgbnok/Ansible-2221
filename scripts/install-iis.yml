@@ -1,9 +1,9 @@
 ---
 # Anthony Swierkosz (ajs2576)
 # CDT-2221 - Team A
-# Install IIS on Windows Servers
+# Install and configure a simple fake Minecraft hosting website using IIS.
 
-- name: Install IIS on Windows Server
+- name: Install and Configure IIS
   hosts: iis_servers
 
   tasks:
@@ -25,3 +25,24 @@
     - name: Reboot If Required
       ansible.windows.win_reboot:
       when: win_feature.reboot_required
+
+    - name: Copy Website Over
+      ansible.windows.win_copy:
+        src: minecraft_server
+        dest: C:\sites
+
+    - name: Add Minecraft Hosting site to IIS
+      community.windows.win_iis_website:
+        name: Minecraft Hosting
+        state: restarted
+        port: 80
+        ip: '*'
+        application_pool: Minecraft Hosting
+        physical_path: C:\sites\minecraft_server
+        parameters: logfile.directory:C:\sites\logs
+
+      # Remove Default Web Site and the standard port 80 binding
+    - name: Remove Default Web Site
+      community.windows.win_iis_website:
+        name: "Default Web Site"
+        state: absent
