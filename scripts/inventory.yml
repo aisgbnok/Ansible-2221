@@ -131,6 +131,7 @@ all:
         cloud_https_b2:
         cloud_ubuntu_b2:
   # Blue Team
+  # Windows
     blue_windows_servers:
       children:
         ad_dns_servers:
@@ -147,8 +148,9 @@ all:
         ansible_password: Hpat.client2221!
     blue_windows:
       children:
-        blue1_windows:
-        blue2_windows:
+        blue_windows_servers:
+        blue_windows_clients:
+  # Linux
     blue_ubuntu:
       children:
         blue1_ubuntu:
@@ -168,6 +170,17 @@ all:
         blue_cloud:
       vars:
         ansible_user: greyteam
+  # All Blue
+    all_blue:
+      children:
+        blue_windows:
+        blue_linux:
+  # Red
+    all_red:
+      children:
+        red_kali:
+        red_windows:
+  # Global
     all_windows:
       children:
         blue_windows:
@@ -175,14 +188,7 @@ all:
       vars:
         ansible_connection: ssh
         ansible_shell_type: cmd
-    all_blue:
+    all_linux:
       children:
-        blue_windows:
-        blue_ubuntu:
-        blue_centos:
-        blue_cloud:
-  # Red
-    all_red:
-      children:
+        blue_linux:
         red_kali:
-        red_windows:
