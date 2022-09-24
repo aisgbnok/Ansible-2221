@@ -1,7 +1,74 @@
 ---
 all:
   children:
+    # DHCP Servers - Ubuntu
     dhcp_servers:
       hosts:
-        dhcp_server_b[1:2]:
-          ansible_host: 192.168.[10:20:10].10
+        dhcp_server_b1:
+          ansible_host: 192.168.10.10
+        dhcp_server_b2:
+          ansible_host: 192.168.20.10
+    # AD/DNS Servers - Windows Server 2016
+    ad_dns_servers:
+      hosts:
+        ad_dns_server_b1:
+          ansible_host: 192.168.10.20
+        ad_dns_server_b2:
+          ansible_host: 192.168.20.20
+    # HTTPS Web Servers - CentOS Stream 9
+    web_servers:
+      hosts:
+        web_server_b1:
+          ansible_host: 192.168.10.30
+        web_server_b2:
+          ansible_host: 192.168.20.30
+    # Database Servers - Ubuntu
+    db_servers:
+      hosts:
+        db_server_b1:
+          ansible_host: 192.168.10.40
+        db_server_b2:
+          ansible_host: 192.168.20.40
+    # Mail Servers - Ubuntu
+    mail_servers:
+      hosts:
+        mail_server_b1:
+          ansible_host: 192.168.10.50
+        mail_server_b2:
+          ansible_host: 192.168.20.50
+    # IIS Web Servers - Windows Server 2022
+    iis_servers:
+      hosts:
+        iis_server_b1:
+          ansible_host: 192.168.10.60
+        iis_server_b2:
+          ansible_host: 192.168.20.60
+    # LDAP Clients - Windows 10
+    ldap_clients:
+      hosts:
+        ldap_client_b1:
+          ansible_host: 192.168.10.100
+        ldap_client_b2:
+          ansible_host: 192.168.20.100
+    # Minecraft Clients - CentOS Stream 9
+    minecraft_clients:
+      hosts:
+        minecraft_client_b1:
+          ansible_host: 192.168.10.110
+        minecraft_client_b2:
+          ansible_host: 192.168.20.110
+    # Minecraft Clients - CentOS Stream 9
+    rdp_clients:
+      hosts:
+        rdp_client_b1:
+          ansible_host: 192.168.10.120
+        rdp_client_b2:
+          ansible_host: 192.168.20.120
+    # Kali Clients - Red Team
+    kali_clients:
+      hosts:
+        ansible_host: 192.168.50.[1:11]
+    # Windows Clients - Red Team
+    windows_clients:
+      hosts:
+        ansible_host: 192.168.50.2[0:3]
