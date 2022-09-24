@@ -107,7 +107,7 @@ all:
         web_server_b1:
         minecraft_client_b1:
     blue1_cloud:
-      children:
+      hosts:
         cloud_https_b1:
         cloud_ubuntu_b1:
   # Blue Team 2
@@ -127,7 +127,7 @@ all:
         web_server_b2:
         minecraft_client_b2:
     blue2_cloud:
-      children:
+      hosts:
         cloud_https_b2:
         cloud_ubuntu_b2:
   # Blue Team
@@ -151,6 +151,7 @@ all:
       children:
         blue_ubuntu:
         blue_centos:
+        blue_cloud:
       vars:
         ansible_user: greyteam
     all_blue:
