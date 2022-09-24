@@ -53,12 +53,12 @@ all:
           ansible_host: 192.168.10.100
         ldap_client_b2:
           ansible_host: 192.168.20.100
-    # Minecraft Clients - CentOS Stream 9
-    minecraft_clients:
+    # Minecraft Servers - CentOS Stream 9
+    minecraft_servers:
       hosts:
-        minecraft_client_b1:
+        minecraft_server_b1:
           ansible_host: 192.168.10.110
-        minecraft_client_b2:
+        minecraft_server_b2:
           ansible_host: 192.168.20.110
     # RDP Clients - Windows 10
     rdp_clients:
@@ -67,6 +67,20 @@ all:
           ansible_host: 192.168.10.120
         rdp_client_b2:
           ansible_host: 192.168.20.120
+    # Cloud HTTPS
+    cloud_https:
+      hosts:
+        cloud_https_b1:
+          ansible_host: 192.168.11.10
+        cloud_https_b2:
+          ansible_host: 192.168.21.10
+    # Cloud Ubuntu
+    cloud_ubuntu:
+      hosts:
+        cloud_ubuntu_b1:
+          ansible_host: 192.168.11.20
+        cloud_ubuntu_b2:
+          ansible_host: 192.168.21.20
     # Kali Clients - Red Team
     red_kali:
       hosts:
@@ -92,6 +106,10 @@ all:
       hosts:
         web_server_b1:
         minecraft_client_b1:
+    blue1_cloud:
+      children:
+        cloud_https_b1:
+        cloud_ubuntu_b1:
   # Blue Team 2
     blue2_windows:
       hosts:
@@ -108,6 +126,10 @@ all:
       hosts:
         web_server_b2:
         minecraft_client_b2:
+    blue2_cloud:
+      children:
+        cloud_https_b2:
+        cloud_ubuntu_b2:
   # Blue Team
     blue_windows:
       children:
@@ -121,6 +143,10 @@ all:
       children:
         blue1_centos:
         blue2_centos:
+    blue_cloud:
+      children:
+        blue1_cloud:
+        blue2_cloud:
     blue_linux:
       children:
         blue_ubuntu:
@@ -132,6 +158,7 @@ all:
         blue_windows:
         blue_ubuntu:
         blue_centos:
+        blue_cloud:
   # Red
     all_red:
       children:
