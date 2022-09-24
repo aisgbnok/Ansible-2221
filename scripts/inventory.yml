@@ -142,6 +142,9 @@ all:
       children:
         blue1_windows:
         blue2_windows:
+      vars:
+        ansible_user: greyteam
+        ansible_password: Hpat.client2221!
     blue_ubuntu:
       children:
         blue1_ubuntu:
