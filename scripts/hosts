@@ -1,0 +1,15 @@
+[dhcp_servers]
+dhcp_server_b1 ansible_host=192.168.10.10
+dhcp_server_b2 ansible_host=192.168.20.10
+
+[db_servers]
+db_server_b1 ansible_host=192.168.10.40
+db_server_b2 ansible_host=192.168.20.40
+
+[mail_servers]
+mail_server_b1 ansible_host=192.168.10.50
+mail_server_b2 ansible_host=192.168.20.50
+
+rdp
+
+
