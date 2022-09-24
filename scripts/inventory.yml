@@ -109,13 +109,16 @@ all:
   # Blue Team
     blue_windows:
       children:
-        blue[1:2]_windows:
+        blue1_windows:
+        blue2_windows:
     blue_ubuntu:
       children:
-        blue[1:2]_ubuntu:
+        blue1_ubuntu:
+        blue2_ubuntu:
     blue_centos:
       children:
-        blue[1:2]_centos:
+        blue1_centos:
+        blue2_centos:
     all_blue:
       children:
         blue_windows:
