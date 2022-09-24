@@ -108,21 +108,21 @@ all:
         minecraft_client_b2:
   # Blue Team
     blue_windows:
-      hosts:
+      children:
         blue[1:2]_windows:
     blue_ubuntu:
-      hosts:
+      children:
         blue[1:2]_ubuntu:
     blue_centos:
-      hosts:
+      children:
         blue[1:2]_centos:
     all_blue:
-      hosts:
+      children:
         blue_windows:
         blue_ubuntu:
         blue_centos:
   # Red
     all_red:
-      hosts:
+      children:
         red_kali:
         red_windows:
