@@ -67,8 +67,8 @@ all:
     # Kali Clients - Red Team
     kali_clients:
       hosts:
-        ansible_host: 192.168.50.[1:11]
+        192.168.50.[1:11]
     # Windows Clients - Red Team
     windows_clients:
       hosts:
-        ansible_host: 192.168.50.2[0:3]
+        192.168.50.2[0:3]
