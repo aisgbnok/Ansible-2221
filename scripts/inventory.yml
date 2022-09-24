@@ -37,8 +37,6 @@ all:
           ansible_host: 192.168.10.50
         mail_server_b2:
           ansible_host: 192.168.20.50
-      vars:
-        ansible_user: mailserver                # Special
     # IIS Web Servers - Windows Server 2022
     iis_servers:
       hosts:
@@ -105,7 +103,7 @@ all:
     blue1_centos:
       hosts:
         web_server_b1:
-        minecraft_client_b1:
+        minecraft_server_b1:
     blue1_cloud:
       hosts:
         cloud_https_b1:
@@ -125,7 +123,7 @@ all:
     blue2_centos:
       hosts:
         web_server_b2:
-        minecraft_client_b2:
+        minecraft_server_b2:
     blue2_cloud:
       hosts:
         cloud_https_b2:
