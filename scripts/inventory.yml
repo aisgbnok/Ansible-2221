@@ -37,6 +37,8 @@ all:
           ansible_host: 192.168.10.50
         mail_server_b2:
           ansible_host: 192.168.20.50
+      vars:
+        ansible_user: mailserver                # Special
     # IIS Web Servers - Windows Server 2022
     iis_servers:
       hosts:
@@ -119,6 +121,12 @@ all:
       children:
         blue1_centos:
         blue2_centos:
+    blue_linux:
+      children:
+        blue_ubuntu:
+        blue_centos:
+      vars:
+        ansible_user: greyteam
     all_blue:
       children:
         blue_windows:
