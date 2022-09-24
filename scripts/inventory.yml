@@ -111,9 +111,11 @@ all:
       hosts:
         blue[1:2]_windows:
     blue_ubuntu:
-      blue[1:2]_ubuntu:
+      hosts:
+        blue[1:2]_ubuntu:
     blue_centos:
-      blue[1:2]_centos:
+      hosts:
+        blue[1:2]_centos:
     all_blue:
       hosts:
         blue_windows:
