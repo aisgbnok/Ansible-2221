@@ -1,6 +1,7 @@
 ---
 all:
   children:
+# --- Hosts ---
     # DHCP Servers - Ubuntu
     dhcp_servers:
       hosts:
@@ -57,7 +58,7 @@ all:
           ansible_host: 192.168.10.110
         minecraft_client_b2:
           ansible_host: 192.168.20.110
-    # Minecraft Clients - CentOS Stream 9
+    # RDP Clients - Windows 10
     rdp_clients:
       hosts:
         rdp_client_b1:
@@ -65,10 +66,61 @@ all:
         rdp_client_b2:
           ansible_host: 192.168.20.120
     # Kali Clients - Red Team
-    kali_clients:
+    red_kali:
       hosts:
         192.168.50.[1:11]
     # Windows Clients - Red Team
-    windows_clients:
+    red_windows:
       hosts:
         192.168.50.2[0:3]
+# --- Groups ---
+  # Blue Team 1
+    blue1_windows:
+      hosts:
+        ad_dns_server_b1:
+        iis_server_b1:
+        ldap_client_b1:
+        rdp_client_b1:
+    blue1_ubuntu:
+      hosts:
+        dhcp_server_b1:
+        db_server_b1:
+        mail_server_b1:
+    blue1_centos:
+      hosts:
+        web_server_b1:
+        minecraft_client_b1:
+  # Blue Team 2
+    blue2_windows:
+      hosts:
+        ad_dns_server_b2:
+        iis_server_b2:
+        ldap_client_b2:
+        rdp_client_b2:
+    blue2_ubuntu:
+      hosts:
+        dhcp_server_b2:
+        db_server_b2:
+        mail_server_b2:
+    blue2_centos:
+      hosts:
+        web_server_b2:
+        minecraft_client_b2:
+  # Blue Team
+    blue_windows:
+      hosts:
+        blue[1:2]_windows:
+    blue_ubuntu:
+      blue[1:2]_ubuntu:
+    blue_centos:
+      blue[1:2]_centos:
+    all_blue:
+      hosts:
+        blue_windows:
+        blue_ubuntu:
+        blue_centos:
+  # Red
+    all_red:
+      hosts:
+        red_kali:
+        red_windows:
