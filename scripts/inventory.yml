@@ -131,20 +131,24 @@ all:
         cloud_https_b2:
         cloud_ubuntu_b2:
   # Blue Team
-    windows_servers:
+    blue_windows_servers:
       children:
         ad_dns_servers:
         iis_servers:
       vars:
         ansible_user: Administrator
         ansible_password: Hpat.admin2221!
+    blue_windows_clients:
+      children:
+        ldap_clients:
+        rdp_clients:
+      vars:
+        ansible_user: greyteam
+        ansible_password: Hpat.client2221!
     blue_windows:
       children:
         blue1_windows:
         blue2_windows:
-      vars:
-        ansible_user: greyteam
-        ansible_password: Hpat.client2221!
     blue_ubuntu:
       children:
         blue1_ubuntu:
