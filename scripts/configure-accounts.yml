@@ -9,11 +9,12 @@
   - name: Set blueteam
     ansible.builtin.user:
       name: blueteam
-      password: {{ b_pass | password_hash('sha512') }}
+      password: "{{ b_pass | password_hash('sha512') }}"
 
   - name: Set blueteam_admin
     ansible.builtin.user:
       name: blueteam_admin
-      password: {{ b_pass | password_hash('sha512') }}
-      groups: wheel
+      password: "{{ b_pass | password_hash('sha512') }}"
+      groups: "{{ 'wheel' if ansible_facts['distribution'] == 'CentOS' else 'sudo' }}"
+      append: yes
 
