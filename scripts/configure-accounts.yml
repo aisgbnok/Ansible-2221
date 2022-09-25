@@ -3,14 +3,17 @@
 ---
 - name: Configure Global User Accounts
   hosts: blue_linux
+  vars:
+    b_pass: Chang3me123!
   tasks:
   - name: Set blueteam
     ansible.builtin.user:
       name: blueteam
-      password: Chang3me123!
+      password: {{ b_pass | password_hash('sha512') }}
+
   - name: Set blueteam_admin
     ansible.builtin.user:
       name: blueteam_admin
-      password: Chang3me123!
+      password: {{ b_pass | password_hash('sha512') }}
       groups: wheel
 
