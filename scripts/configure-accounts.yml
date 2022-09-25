@@ -1,0 +1,16 @@
+# Anthony Swierkosz (ajs2576)
+# Configure Global User Accounts
+---
+- name: Configure Global User Accounts
+  hosts: blue_linux
+  tasks:
+  - name: Set blueteam
+    ansible.builtin.user:
+      name: blueteam
+      password: Chang3me123!
+  - name: Set blueteam_admin
+    ansible.builtin.user:
+      name: blueteam_admin
+      password: Chang3me123!
+      groups: wheel
+
