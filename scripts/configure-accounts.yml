@@ -3,18 +3,20 @@
 ---
 - name: Configure Global User Accounts
   hosts: blue_linux
+  become: yes
   vars:
-    b_pass: Chang3me123!
+    blue_pass: Chang3me123!
+
   tasks:
   - name: Set blueteam
     ansible.builtin.user:
       name: blueteam
-      password: "{{ b_pass | password_hash('sha512') }}"
+      password: "{{ blue_pass | password_hash('sha512') }}"
 
   - name: Set blueteam_admin
     ansible.builtin.user:
       name: blueteam_admin
-      password: "{{ b_pass | password_hash('sha512') }}"
+      password: "{{ blue_pass | password_hash('sha512') }}"
       groups: "{{ 'wheel' if ansible_facts['distribution'] == 'CentOS' else 'sudo' }}"
       append: yes
 
