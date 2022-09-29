@@ -1,0 +1,49 @@
+---
+# Anthony Swierkosz (ajs2576)
+# CDT-2221 - Team A
+# Install PowerShellCore and Windows Terminal
+
+- name: Install PowerShellCore and Terminal
+  hosts: iisservers
+
+  tasks:
+
+    - name: Test Reachability
+      ansible.windows.win_ping:
+
+    - name: Install PowerShellCore
+      ansible.windows.win_package:
+        path: https://github.com/PowerShell/PowerShell/releases/download/v7.2.6/PowerShell-7.2.6-win-x64.msi
+        arguments: /quiet
+
+    - name: Download Terminal Provisioning Bundle
+      ansible.windows.win_get_url:
+        url: https://github.com/microsoft/terminal/releases/download/v1.14.2281.0/Microsoft.WindowsTerminal_Win10_1.14.2281.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+        dest: C:\Users\Administrator\Downloads
+
+    - name: Extract Terminal Bundle
+      community.windows.win_unzip:
+        src: C:\Users\Administrator\Downloads\Microsoft.WindowsTerminal_Win10_1.14.2281.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+        dest: C:\Users\Administrator\Downloads\Terminal
+        creates: C:\Users\Administrator\Downloads\Terminal
+
+    - name: Install Terminal as Provisioned Appx
+      ansible.windows.win_powershell:
+      chdir: C:\Users\Administrator\Downloads\Terminal
+      script: |
+        Add-ProvisionedAppPackage -Online -PackagePath .\8d6e2d57f3ae4e4daeae0469b1eb2487.msixbundle -DependencyPackagePath .\Microsoft.VCLibs.140.00.UWPDesktop_14.0.30704.0_x64__8wekyb3d8bbwe.appx -LicensePath .\8d6e2d57f3ae4e4daeae0469b1eb2487_License1.xml
+    
+    - name: Delete Terminal Files
+      ansible.windows.win_file:
+        path: C:\Users\Administrator\Downloads\Terminal
+        state: absent
+
+    - name: Delete Terminal Bundle
+      ansible.windows.win_file:
+        path: C:\Users\Administrator\Downloads\Microsoft.WindowsTerminal_Win10_1.14.2281.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+        state: absent
+
+    - name: Delete PowerShellCore Installer
+      ansible.windows.win_file:
+        path: C:\Users\Administrator\Downloads\Microsoft.WindowsTerminal_Win10_1.14.2281.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+        state: absent
