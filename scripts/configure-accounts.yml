@@ -1,0 +1,45 @@
+---
+# Anthony Swierkosz (ajs2576)
+# CDT-2221 - Team A
+# Simple playbook that ensures the same users with the same password are on each device.
+
+- name: Setup Blue Linux Accounts and Passwords
+  hosts: blue_linux
+  become: yes
+  vars:
+    password:
+      default: Chang3me123!
+    users:
+      standard: blueteam
+      admin: blueteam_admin
+
+  tasks:
+  - name: Configure standard '{{ users.standard }}' account
+    ansible.builtin.user:
+      name: "{{ users.standard }}"
+      password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+
+  - name: Configure administrator '{{ users.admin }}' account
+    ansible.builtin.user:
+      name: "{{ users.admin }}"
+      password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+      group: "{{ 'wheel' if ansible_facts['distribution'] == 'CentOS' else 'sudo' }}"
+
+- name: Setup Blue Windows Accounts and Passwords
+
+  tasks:
+  - name: Configure standard 'blueteam' account
+    ansible.windows.win_user:
+      fullname: Blue Team
+      name: blueteam
+      password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+
+  - name: Configure administrator 'blueteam_admin' account
+    ansible.windows.win_user:
+      fullname: Blue Team Admin
+      name: blueteam_admin
+      password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+      groups:
+        - Administrators
+        - Users
+
