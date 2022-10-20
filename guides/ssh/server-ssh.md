@@ -13,7 +13,7 @@ To enable passwordless SSH authentication between a control node and a managed n
 #### Administrator Account
 
 If you are using an administrator account on the managed node, then the CN's RSA key must be placed in the `C:\ProgramData\ssh\administrators_authorized_keys` file.
-Additionally the file must be given specific permissions for the OpenSSH server to accept it.
+Additionally, the file must be given specific permissions for the OpenSSH server to accept it.
 Run the following commands in an elevated PowerShell prompt, replacing `user`@`ip` with the managed node's corresponding values.
 
 ```bash
