@@ -1,0 +1,40 @@
+---
+# CDT-2221 Alpha Team
+# Anthony Swierkosz; ajs2576
+# Installs PowerShellCore and Windows Terminal
+
+- name: Install PowerShellCore and Terminal
+  hosts: windows
+
+  tasks:
+
+    - name: Install PowerShellCore
+      win_package:
+        path: https://github.com/PowerShell/PowerShell/releases/download/v7.2.6/PowerShell-7.2.6-win-x64.msi
+        arguments: /quiet
+
+    - name: Download Terminal Provisioning Bundle
+      win_get_url:
+        url: https://github.com/microsoft/terminal/releases/download/v1.15.2524.0/Microsoft.WindowsTerminal_Win10_1.15.2524.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+        dest: C:\
+
+    - name: Extract Terminal Bundle
+      win_unzip:
+        src: C:\Microsoft.WindowsTerminal_Win10_1.15.2524.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+        dest: C:\Terminal
+        creates: C:\Terminal
+
+    - name: Install Terminal as Provisioned Appx
+      win_shell: Add-ProvisionedAppPackage -Online -PackagePath .\fce7cf99dede4a21bb4dddb616eeb705.msixbundle -DependencyPackagePath .\Microsoft.VCLibs.140.00.UWPDesktop_14.0.30704.0_x64__8wekyb3d8bbwe.appx -LicensePath .\fce7cf99dede4a21bb4dddb616eeb705_License1.xml
+      args:
+        chdir: C:\Terminal
+
+    - name: Delete Terminal Files
+      win_file:
+        path: C:\Terminal
+        state: absent
+
+    - name: Delete Terminal Bundle
+      win_file:
+          path: C:\Microsoft.WindowsTerminal_Win10_1.15.2524.0_8wekyb3d8bbwe.msixbundle_Windows10_PreinstallKit.zip
+          state: absent
