@@ -1,0 +1,102 @@
+---
+# CDT-2221 Alpha Blue Team 2
+# Anthony Swierkosz; ajs2576
+# Ansible Control Node inventory file for global SSH control over blueteam 2 managed nodes.
+
+all:
+
+# ------------------------
+# -------- Hosts ---------
+# ------------------------
+
+  hosts:
+
+# --- Corporate
+
+    # Active Directory - Windows Server 2022
+    a_d:
+      ansible_host: 192.168.200.10
+
+    # Rocket Chat - Ubuntu #
+    r_c:
+      ansible_host: 192.168.200.11
+
+    # Windows Client - Windows 10
+    w_c:
+      ansible_host: 192.168.200.20
+
+# --- Cloud
+
+    # Web - CentOS Linux 8
+    w:
+      ansible_host: 192.168.201.10
+
+    # Mail - Windows Server 2022
+    m:
+      ansible_host: 192.168.201.11
+
+    # SQL - CentOS Linux 8
+    s:
+      ansible_host: 192.168.201.20
+
+    # Next Cloud - CentOS Linux 8
+    n_c:
+      ansible_host: 192.168.201.21
+
+# ------------------------
+# -------- Groups --------
+# ------------------------
+
+  children:
+
+# --- Corporate
+
+    corp:
+      hosts:
+        a_d:
+        r_c:
+        w_c:
+
+    corp_l:
+      hosts:
+        r_c:
+
+    corp_w:
+      hosts:
+        a_d:
+        w_c:
+
+# --- Cloud
+
+    cloud:
+      hosts:
+        w:
+        m:
+        s:
+        n_c:
+
+    cloud_l:
+      hosts:
+        w:
+        s:
+        n_c:
+
+    cloud_w:
+      hosts:
+        m:
+
+# --- Global
+
+    windows:
+      children:
+        corp_w:
+        cloud_w:
+      vars:
+        ansible_connection: ssh
+        ansible_shell_type: cmd
+        ansible_user: Administrator
+
+    linux:
+      children:
+        corp_l:
+        cloud_l:
