@@ -1,8 +1,8 @@
 # Installing and Configuring SSH
 
-A streamlined guide that explains how to install and configure ssh for an ansible environment.
+A streamlined guide that explains how to install and configure SSH for an Ansible environment.
 
-|        | Platform                                  | Description                                       |
+|        | Guide                                     | Description                                       |
 |:-------|:------------------------------------------|:--------------------------------------------------|
 | **1.** | [**Install SSH**](install-ssh.md)         | Install SSH on managed nodes or client devices.   |
 | **2.** | [**Configure Client SSH**](client-ssh.md) | Configure SSH on managed nodes or client devices. |
