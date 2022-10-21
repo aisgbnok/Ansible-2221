@@ -1,0 +1,45 @@
+---
+# CDT-2221 Alpha Team
+# Anthony Swierkosz; ajs2576
+# Installs and configures a simple fake Minecraft hosting website using IIS.
+
+- name: Install and Configure IIS
+  hosts: iis_servers
+
+  tasks:
+
+    # Install the IIS Web-Server feature
+    # Include sub features and the management tools
+    - name: Install IIS
+      win_feature:
+        name: Web-Server
+        state: present
+        include_sub_features: yes
+        include_management_tools: yes
+      register: win_feature
+
+    # Reboot the system if the new feature needs a reboot to work
+    - name: Reboot If Required
+      win_reboot:
+      when: win_feature.reboot_required
+
+    - name: Copy Website Over
+      win_copy:
+        src: minecraft_server
+        dest: C:\sites
+
+    - name: Add Minecraft Hosting site to IIS
+      win_iis_website:
+        name: Minecraft Hosting
+        state: restarted
+        port: 80
+        ip: '*'
+        application_pool: Minecraft Hosting
+        physical_path: C:\sites\minecraft_server
+        parameters: logfile.directory:C:\sites\logs
+
+      # Remove Default Web Site and the standard port 80 binding
+    - name: Remove Default Web Site
+      win_iis_website:
+        name: "Default Web Site"
+        state: absent
