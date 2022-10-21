@@ -1,16 +1,19 @@
 ---
-# Anthony Swierkosz (ajs2576)
-# CDT-2221 - Team A
-# Ansible Control Node inventory file for global SSH control over managed nodes.
+# CDT-2221 Alpha Team
+# Anthony Swierkosz; ajs2576
+# Ansible Control Node inventory file for global SSH control over grayteam managed nodes.
 
 all:
-  children:
 
 # ------------------------
 # -------- Hosts ---------
 # ------------------------
 
-    # DHCP Servers - Ubuntu
+  children:
+
+# --- Local Blue
+
+    # DHCP Servers - Ubuntu 22.04.1 LTS
     dhcp_servers:
       hosts:
         dhcp_server_b1:
@@ -34,7 +37,7 @@ all:
         web_server_b2:
           ansible_host: 192.168.20.30
 
-    # Database Servers - Ubuntu
+    # Database Servers - Ubuntu 22.04.1 LTS
     db_servers:
       hosts:
         db_server_b1:
@@ -42,7 +45,7 @@ all:
         db_server_b2:
           ansible_host: 192.168.20.40
 
-    # Mail Servers - Ubuntu
+    # Mail Servers - Ubuntu 22.04.1 LTS
     mail_servers:
       hosts:
         mail_server_b1:
@@ -58,7 +61,7 @@ all:
         iis_server_b2:
           ansible_host: 192.168.20.60
 
-    # LDAP Clients - Windows 10
+    # LDAP Clients - Windows 10 22H2
     ldap_clients:
       hosts:
         ldap_client_b1:
@@ -74,13 +77,15 @@ all:
         minecraft_server_b2:
           ansible_host: 192.168.20.110
 
-    # RDP Clients - Windows 10
+    # RDP Clients - Windows 10 22H2
     rdp_clients:
       hosts:
         rdp_client_b1:
           ansible_host: 192.168.10.120
         rdp_client_b2:
           ansible_host: 192.168.20.120
+
+# --- Cloud Blue
 
     # Cloud HTTPS - CentOS Stream 9
     cloud_https:
@@ -90,7 +95,7 @@ all:
         cloud_https_b2:
           ansible_host: 192.168.21.10
 
-    # Cloud Ubuntu
+    # Cloud Ubuntu 22.04.1 LTS
     cloud_ubuntu:
       hosts:
         cloud_ubuntu_b1:
@@ -98,12 +103,14 @@ all:
         cloud_ubuntu_b2:
           ansible_host: 192.168.21.20
 
-    # Red Team - Kali Clients
-    red_kali:
+# --- Local Red
+
+    # Linux Clients - Kali 2022.3
+    red_linux:
       hosts:
         192.168.50.[1:11]
 
-    # Red Team - Windows Clients
+    # Windows Clients - Windows 10 22H2
     red_windows:
       hosts:
         192.168.50.2[0:3]
@@ -112,7 +119,7 @@ all:
 # -------- Groups --------
 # ------------------------
 
-# ---- Blue Windows
+# --- Blue Windows
 
     blue_windows_servers:
       children:
@@ -120,54 +127,48 @@ all:
         iis_servers:
       vars:
         ansible_user: Administrator
-        ansible_password: Hpat.admin2221!
 
     blue_windows_clients:
       children:
         ldap_clients:
         rdp_clients:
-      vars:
-        ansible_user: greyteam
-        ansible_password: Hpat.client2221!
 
     blue_windows:
       children:
         blue_windows_servers:
         blue_windows_clients:
 
-# ---- Blue Cloud
+# --- Blue Cloud
 
     blue_cloud:
       children:
         cloud_https:
         cloud_ubuntu:
 
-# ---- Blue Linux
+# --- Blue Linux
 
     blue_linux:
       children:
         blue_ubuntu:
         blue_centos:
         blue_cloud:
-      vars:
-        ansible_user: greyteam
 
-# ---- Blue All
+# --- Blue All
 
     blue:
       children:
         blue_windows:
         blue_linux:
 
-# ---- Red All
+# --- Red All
 
     red:
       children:
-        red_kali:
+        red_linux:
         red_windows:
 
 
-# ---- Global
+# --- Global
 
     windows:
       children:
@@ -176,8 +177,9 @@ all:
       vars:
         ansible_connection: ssh
         ansible_shell_type: cmd
+        ansible_user: grayteam
 
     linux:
       children:
         blue_linux:
-        red_kali:
+        red_linux:
