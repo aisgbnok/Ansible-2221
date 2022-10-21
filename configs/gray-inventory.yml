@@ -1,0 +1,185 @@
+---
+# CDT-2221 Alpha Team
+# Anthony Swierkosz; ajs2576
+# Ansible Control Node inventory file for global SSH control over grayteam managed nodes.
+
+all:
+
+# ------------------------
+# -------- Hosts ---------
+# ------------------------
+
+  children:
+
+# --- Local Blue
+
+    # DHCP Servers - Ubuntu 22.04.1 LTS
+    dhcp_servers:
+      hosts:
+        dhcp_server_b1:
+          ansible_host: 192.168.10.10
+        dhcp_server_b2:
+          ansible_host: 192.168.20.10
+
+    # AD/DNS Servers - Windows Server 2022
+    ad_dns_servers:
+      hosts:
+        ad_dns_server_b1:
+          ansible_host: 192.168.10.20
+        ad_dns_server_b2:
+          ansible_host: 192.168.20.20
+
+    # HTTPS Web Servers - CentOS Stream 9
+    web_servers:
+      hosts:
+        web_server_b1:
+          ansible_host: 192.168.10.30
+        web_server_b2:
+          ansible_host: 192.168.20.30
+
+    # Database Servers - Ubuntu 22.04.1 LTS
+    db_servers:
+      hosts:
+        db_server_b1:
+          ansible_host: 192.168.10.40
+        db_server_b2:
+          ansible_host: 192.168.20.40
+
+    # Mail Servers - Ubuntu 22.04.1 LTS
+    mail_servers:
+      hosts:
+        mail_server_b1:
+          ansible_host: 192.168.10.50
+        mail_server_b2:
+          ansible_host: 192.168.20.50
+
+    # IIS Web Servers - Windows Server 2022
+    iis_servers:
+      hosts:
+        iis_server_b1:
+          ansible_host: 192.168.10.60
+        iis_server_b2:
+          ansible_host: 192.168.20.60
+
+    # LDAP Clients - Windows 10 22H2
+    ldap_clients:
+      hosts:
+        ldap_client_b1:
+          ansible_host: 192.168.10.100
+        ldap_client_b2:
+          ansible_host: 192.168.20.100
+
+    # Minecraft Servers - CentOS Stream 9
+    minecraft_servers:
+      hosts:
+        minecraft_server_b1:
+          ansible_host: 192.168.10.110
+        minecraft_server_b2:
+          ansible_host: 192.168.20.110
+
+    # RDP Clients - Windows 10 22H2
+    rdp_clients:
+      hosts:
+        rdp_client_b1:
+          ansible_host: 192.168.10.120
+        rdp_client_b2:
+          ansible_host: 192.168.20.120
+
+# --- Cloud Blue
+
+    # Cloud HTTPS - CentOS Stream 9
+    cloud_https:
+      hosts:
+        cloud_https_b1:
+          ansible_host: 192.168.11.10
+        cloud_https_b2:
+          ansible_host: 192.168.21.10
+
+    # Cloud Ubuntu 22.04.1 LTS
+    cloud_ubuntu:
+      hosts:
+        cloud_ubuntu_b1:
+          ansible_host: 192.168.11.20
+        cloud_ubuntu_b2:
+          ansible_host: 192.168.21.20
+
+# --- Local Red
+
+    # Linux Clients - Kali 2022.3
+    red_linux:
+      hosts:
+        192.168.50.[1:11]
+
+    # Windows Clients - Windows 10 22H2
+    red_windows:
+      hosts:
+        192.168.50.2[0:3]
+
+# ------------------------
+# -------- Groups --------
+# ------------------------
+
+# --- Blue Windows
+
+    blue_windows_servers:
+      children:
+        ad_dns_servers:
+        iis_servers:
+      vars:
+        ansible_user: Administrator
+
+    blue_windows_clients:
+      children:
+        ldap_clients:
+        rdp_clients:
+
+    blue_windows:
+      children:
+        blue_windows_servers:
+        blue_windows_clients:
+
+# --- Blue Cloud
+
+    blue_cloud:
+      children:
+        cloud_https:
+        cloud_ubuntu:
+
+# --- Blue Linux
+
+    blue_linux:
+      children:
+        blue_ubuntu:
+        blue_centos:
+        blue_cloud:
+
+# --- Blue All
+
+    blue:
+      children:
+        blue_windows:
+        blue_linux:
+
+# --- Red All
+
+    red:
+      children:
+        red_linux:
+        red_windows:
+
+
+# --- Global
+
+    windows:
+      children:
+        blue_windows:
+        red_windows:
+      vars:
+        ansible_connection: ssh
+        ansible_shell_type: cmd
+        ansible_user: grayteam
+
+    linux:
+      children:
+        blue_linux:
+        red_linux:
