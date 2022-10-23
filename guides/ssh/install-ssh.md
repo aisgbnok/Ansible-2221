@@ -40,13 +40,11 @@ Both OpenSSH Client and Server should have a state of `Installed`, if not contin
 1. Under the **Assets** section of the latest release, download the appropriate MSI installer for your device architecture `Win32` or `Win64`.
 1. Run the **Microsoft Windows Installer (MSI)** and follow its steps to complete installation.
 1. In an elevated PowerShell prompt, run the following command to add OpenSSH to the System Path.
-   <br><br>
    ```powershell
    [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path",[System.EnvironmentVariableTarget]::Machine) + ';' + ${Env:ProgramFiles} + '\OpenSSH', [System.EnvironmentVariableTarget]::Machine)
    ```
 1. Restart any PowerShell prompts to reload System Path.
 1. Run the following PowerShell command to verify that OpenSSH was successfully installed.
-   <br><br>
    ```powershell
    ssh -V
    ```
@@ -60,11 +58,30 @@ Both OpenSSH Client and Server should have a state of `Installed`, if not contin
 > Linux traditionally comes with OpenSSH installed by default.
 > Skip to the [Configuring SSH on Client Devices](client-ssh.md#linux) or [Configuring SSH on Server Devices](server-ssh.md#linux) guide.
 
-```shell
-sudo apt install openssh-server
-sudo apt install openssh-client
-```
-
-```shell
-sudo yum install openssh-server
-```
+1. Ensure the `openssh-server` package is installed using your distribution's package manager.
+   ```shell
+   sudo apt install openssh-server
+   sudo apt install openssh-client
+   ```
+   ```shell
+   sudo yum install openssh-server
+   ```
+   > **Note**\
+   > Some distributions like Kali require you to regenerate the default SSH keys.
+1. Regenerate your distribution's default SSH keys.
+   ```shell
+   sudo dpkg-reconfigure openssh-server
+   ```
+1. Enable the SSH service.
+    ```shell
+   sudo systemctl status ssh.service
+   ```
+1. (Optional) Enable password based SSH authentication.
+   ```shell
+   sudo vim /etc/ssh/ssh_config
+   ```
+   Uncomment the following line:
+      ```text
+   PasswordAuthentication yes
+   ```
+   Save the `ssh_config` file: <kbd>Escape</kbd><kbd>:</kbd><kbd>w</kbd><kbd>q</kbd><kbd>Enter</kbd>.
