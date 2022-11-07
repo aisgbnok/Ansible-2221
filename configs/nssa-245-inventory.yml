@@ -1,0 +1,124 @@
+---
+# NSSA 245 2221
+# Anthony Swierkosz; ajs2576
+# Ansible Control Node inventory file for global SSH control over NSSA 245 managed nodes.
+
+all:
+
+# ------------------------
+# -------- Hosts ---------
+# ------------------------
+
+  children:
+
+# --- Net A
+
+    net_a:
+      hosts:
+
+        # CentOS Client 1 - CentOS Stream 9
+        centos_a_1:
+          ansible_host: 10.150.84.10
+
+        # CentOS Client 2 - CentOS Stream 9
+        centos_a_2:
+          ansible_host: 10.150.84.11
+
+        # CentOS Client 3 - CentOS Stream 9
+        centos_a_3:
+          ansible_host: 10.150.84.12
+
+        # CentOS Client 4 - CentOS Stream 9
+        centos_a_4:
+          ansible_host: 10.150.84.13
+
+        # Windows Client - Windows 11 22H2
+        windows_client_a:
+          ansible_host: 10.150.84.20
+
+        # Windows Server 1 - Windows Server 2022
+        windows_server_a_1:
+          ansible_host: 10.150.84.30
+
+        # Windows Server 2 - Windows Server 2022
+        windows_server_a_2:
+          ansible_host: 10.150.84.31
+
+# --- Net B
+
+    net_b:
+      hosts:
+
+        # CentOS Client 1 - CentOS Stream 7
+        centos_b_1:
+          ansible_host: 10.150.85.10
+
+        # CentOS Client 2 - CentOS Stream 7
+        centos_b_2:
+          ansible_host: 10.150.85.11
+
+        # CentOS Client 3 - CentOS Stream 7
+        centos_b_3:
+          ansible_host: 10.150.85.12
+
+        # Windows Client - Windows 11 22H2
+        windows_client_b:
+          ansible_host: 10.150.85.20
+
+        # Windows Server 1 - Windows Server 2022
+        windows_server_b_1:
+          ansible_host: 10.150.85.30
+
+        # Windows Server 2 - Windows Server 2022
+        windows_server_b_2:
+          ansible_host: 10.150.85.31
+
+# ------------------------
+# -------- Groups --------
+# ------------------------
+
+# --- Windows
+
+    windows_clients:
+      hosts:
+        windows_client_a:
+        windows_client_b:
+      vars:
+        ansible_user: Student
+
+    windows_servers:
+      hosts:
+        windows_server_a_1:
+        windows_server_a_2:
+        windows_server_b_1:
+        windows_server_b_2:
+      vars:
+        ansible_user: Administrator
+
+    windows:
+      children:
+        windows_clients:
+        windows_servers:
+      vars:
+        ansible_connection: ssh
+        ansible_shell_type: cmd
+
+# --- Linux
+
+    centos_7:
+      hosts:
+        centos_b_1:
+        centos_b_2:
+        centos_b_3:
+
+    centos_9:
+      hosts:
+        centos_a_1:
+        centos_a_2:
+        centos_a_3:
+        centos_a_4:
+
+    linux:
+      children:
+        centos_7:
+        centos_9:
