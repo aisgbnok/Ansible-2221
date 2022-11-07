@@ -64,7 +64,7 @@ Both OpenSSH Client and Server should have a state of `Installed`, if not contin
    sudo apt install openssh-client
    ```
    ```shell
-   sudo yum install openssh-server
+   sudo dnf install openssh-server
    ```
    > **Note**\
    > Some distributions like Kali require you to regenerate the default SSH keys.

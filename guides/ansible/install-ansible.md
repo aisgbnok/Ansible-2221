@@ -19,7 +19,7 @@ sudo apt install ansible
 > That goes against the rules!
 
 ```shell
-sudo yum install epel-release
-sudo yum upgrade
-sudo yum install ansible
+sudo dnf install epel-release
+sudo dnf upgrade
+sudo dnf install ansible
 ```
