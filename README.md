@@ -1,11 +1,8 @@
-# Welcome to Ansible 473
+# Welcome to Ansible 2221
 
-This repository holds my Ansible documentation and scripts while I learn the Ansible platform during my time in the CSEC 473 course.
+This repository holds my Ansible documentation and scripts while I learn the Ansible platform during my time in the Cyber Defense Techniques (CSEC 473) course.
 Project wide documentation will include my personal notes as I learn the platform, frequent commands and tips that I find helpful, as well as documentation for individual scripts.
 This repository is for personal usage; however, it may be beneficial to others looking for examples or references.
-
-*The CSEC 473 course teaches Cyber Defense Techniques.
-This is done in a number of ways including participating in three in-house cybersecurity competitions over the course of the semester.*
 
 ## Repository Structure
 
