@@ -1,0 +1,78 @@
+---
+# CDT-2221 Alpha Red Team
+# Anthony Swierkosz; ajs2576
+# Ansible Control Node inventory file for global SSH control over blue team managed nodes.
+
+all:
+
+# --------------------------------
+# -------- Blue 1 - Hosts --------
+# --------------------------------
+
+  children:
+    blue-1:
+      hosts:
+
+        # --- Two Blue Local Network
+
+        # Teller PC - Windows 95 v4.0.0.950 B
+        teller_pc:
+          ansible_host: 10.x.6.1
+
+        # Accountant PC - Windows 7 Enterprise SP1
+        accountant_pc:
+          ansible_host: 10.x.6.2
+
+        # Executive PC - Windows 10 Enterprise 21H2
+        executive_pc:
+          ansible_host: 10.x.6.3
+
+        # Two Blue NetServices - Windows Server 2022 (20348)
+        tbl_netserv:
+          ansible_host: 10.x.6.4
+
+        # Two Blue AD - Windows Server 2019 (17763)
+        tbl_ad:
+          ansible_host: 10.x.6.5
+
+        # Two Blue Hannah Montana - Hannah Montana Linux (Ubuntu 9.04)
+        tbl_hannah:
+          ansible_host: 10.x.6.6
+
+        # Two Blue Linux - Ubuntu 22.04 Desktop
+        tbl_linux:
+          ansible_host: 10.x.6.7
+
+        # --- Cloud Networks
+
+        # Big Money CEO PC - Windows Vista Ultimate SP2
+        bigmoney_ceo:
+          ansible_host: 10.x.7.1
+
+        # Big Money Minecraft - CentOS 8
+        bigmoney_mc:
+          ansible_host: 10.x.7.2
+
+        # One United Web - Debian 9
+        oneunited_web:
+          ansible_host: 10.x.7.3
+
+        # One United Database - Ubuntu 20.04
+        oneunited_db:
+          ansible_host: 10.x.7.4
+
+        # Two Blue AD - Windows Server 2003 Enterprise
+        twoblue_ad:
+          ansible_host: 10.x.7.5
+
+        # Two Blue Server - Manjaro v???
+        twoblue_server:
+          ansible_host: 10.x.7.6
+
+        # Three Stars IIS - Windows Server 2012 (9200)
+        threestars_iis:
+          ansible_host: 10.x.7.7
+
+        # Three Stars Files - Kali Linux v???
+        threestars_files:
+          ansible_host: 10.x.7.8
