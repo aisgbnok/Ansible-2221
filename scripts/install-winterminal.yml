@@ -10,7 +10,7 @@
 
     - name: Install PowerShellCore
       win_package:
-        path: https://github.com/PowerShell/PowerShell/releases/download/v7.2.7/PowerShell-7.2.7-win-x64.msi
+        path: https://github.com/PowerShell/PowerShell/releases/download/v7.3.0/PowerShell-7.3.0-win-x64.msi
         arguments: /quiet
 
     - name: Download Terminal Provisioning Bundle
