@@ -5,6 +5,7 @@
 
 all:
   children:
+
 # -------------------------------
 # ------------ Hosts ------------
 # -------------------------------
@@ -41,7 +42,7 @@ all:
         b1_tbl_netserv:
           ansible_host: 10.1.6.4
         b2_tbl_netserv:
-          ansible_host: 10.1.6.4
+          ansible_host: 10.2.6.4
 
     # Two Blue AD - Windows Server 2019 (17763)
     tbl_ads:
@@ -57,7 +58,7 @@ all:
         b1_tbl_hannah:
           ansible_host: 10.1.6.6
         b2_tbl_hannah:
-          ansible_host: 10.1.6.6
+          ansible_host: 10.2.6.6
 
     # Two Blue Linux - Ubuntu 22.04 Desktop
     tbl_linuxs:
@@ -68,6 +69,7 @@ all:
           ansible_host: 10.2.6.7
 
 # --- Cloud Networks
+
     # Big Money CEO PC - Windows Vista Ultimate SP2
     bigmoney_ceos:
       hosts:
@@ -122,7 +124,7 @@ all:
         b1_threestars_iis:
           ansible_host: 10.1.7.7
         b2_threestars_iis:
-          ansible_host: 10.1.7.7
+          ansible_host: 10.2.7.7
 
     # Three Stars Files - Kali Linux v???
     threestars_filess:
@@ -130,4 +132,131 @@ all:
         b1_threestars_files:
           ansible_host: 10.1.7.8
         b2_threestars_files:
-          ansible_host: 10.1.7.8
+          ansible_host: 10.2.7.8
+
+# -------------------------------
+# --------- Team Groups ---------
+# -------------------------------
+
+# --- Blue Team 1
+
+    # Linux
+    b1_local_linux:
+      hosts:
+        b1_tbl_hannah:
+        b1_tbl_linux:
+
+    b1_cloud_linux:
+      hosts:
+        b1_bigmoney_mc:
+        b1_oneunited_web:
+        b1_oneunited_db:
+        b1_twoblue_server:
+        b1_threestars_files:
+
+    b1_linux:
+      children:
+        b1_local_linux:
+        b1_cloud_linux:
+
+    # Windows
+    b1_local_windows:
+      hosts:
+        b1_tbl_teller_pc:
+        b1_tbl_account_pc:
+        b1_tbl_executive_pc:
+        b1_tbl_netserv:
+        b1_tbl_ad:
+
+    b1_cloud_windows:
+      hosts:
+        b1_twoblue_ad:
+        b1_threestars_iis:
+
+    b1_windows:
+      b1_local_windows:
+      b1_cloud_windows:
+
+# --- Blue Team 2
+
+    # Linux
+    b2_local_linux:
+      hosts:
+        b2_tbl_hannah:
+        b2_tbl_linux:
+
+    b2_cloud_linux:
+      hosts:
+        b2_bigmoney_mc:
+        b2_oneunited_web:
+        b2_oneunited_db:
+        b2_twoblue_server:
+        b2_threestars_files:
+
+    b2_linux:
+      children:
+        b2_local_linux:
+        b2_cloud_linux:
+
+    # Windows
+    b2_local_windows:
+      hosts:
+        b2_tbl_teller_pc:
+        b2_tbl_account_pc:
+        b2_tbl_executive_pc:
+        b2_tbl_netserv:
+        b2_tbl_ad:
+
+    b2_cloud_windows:
+      hosts:
+        b2_twoblue_ad:
+        b2_threestars_iis:
+
+    b2_windows:
+      b2_local_windows:
+      b2_cloud_windows:
+
+# -------------------------------
+# -------- Global Groups --------
+# -------------------------------
+
+# --- ALl Linux
+
+    linux_locals:
+      children:
+        b1_local_linux:
+        b2_local_linux:
+
+    linux_clouds:
+      children:
+        b1_cloud_linux:
+        b2_cloud_linux:
+
+    linux:
+      children:
+        b1_linux:
+        b2_linux:
+
+# --- ALl Windows
+
+    windows_servers:
+      children:
+        tbl_netservs:
+        tbl_ads:
+        twoblue_ads:
+        threestars_iiss:
+
+    windows_locals:
+      children:
+        b1_local_windows:
+        b2_local_windows:
+
+    windows_clouds:
+      children:
+        b1_cloud_windows:
+        b2_cloud_windows:
+
+    windows:
+      children:
+        b1_windows:
+        b2_windows:
