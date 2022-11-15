@@ -11,17 +11,17 @@
       default: Cdt.red!
     users:
       standard:
-        - Bill Demirkapi
-        - Connor Jackson
-        - Dan Benedetti
-        - Dennis Palad
-        - Jacob Ross
-        - James Hassel
-        - Keira Carrington
-        - Michael Nee
-        - Nick Blanock
-        - Nuzhat Minhaz
-        - Phuong Anh Nguyen
+        - BillDemirkapi
+        - ConnorJackson
+        - DanBenedetti
+        - DennisPalad
+        - JacobRoss
+        - JamesHassel
+        - KeiraCarrington
+        - MichaelNee
+        - NickBlanock
+        - NuzhatMinhaz
+        - PhuongAnhNguyen
       admin:
         - A Bill Demirkapi
         - A Connor Jackson
