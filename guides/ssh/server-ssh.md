@@ -33,6 +33,14 @@ scp ~/.ssh/id_rsa.pub user@ip:/ProgramData/ssh/administrators_authorized_keys
 ssh user@ip 'icacls.exe ""C:\ProgramData\ssh\administrators_authorized_keys"" /inheritance:r /grant ""Administrators:F"" /grant ""SYSTEM:F""'
 ```
 
+```bash
+sudo ssh user@ip 'icacls "C:\ProgramData\ssh\\administrators_authorized_keys" /remove "NT AUTHORITY\Authenticated Users"'
+```
+
+```bash
+sudo ssh user@ip 'icacls "C:\ProgramData\ssh\\administrators_authorized_keys" /inheritance:r'
+```
+
 #### Standard User
 
 If you are using a standard account on the managed node, then the CN's RSA key must be placed in the users `.ssh\authorized_keys` file.
