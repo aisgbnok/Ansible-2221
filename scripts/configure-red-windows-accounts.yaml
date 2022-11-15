@@ -1,6 +1,5 @@
 - name: Setup Red Windows Accounts and Passwords
   hosts: windows
-  become: yes
   vars:
     password:
       default: Cdt.red!
