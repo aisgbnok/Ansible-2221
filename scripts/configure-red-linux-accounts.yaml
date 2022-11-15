@@ -23,17 +23,17 @@
         - NuzhatMinhaz
         - PhuongAnhNguyen
       admin:
-        - A Bill Demirkapi
-        - A Connor Jackson
-        - A Dan Benedetti
-        - A Dennis Palad
-        - A Jacob Ross
-        - A James Hassel
-        - A Keira Carrington
-        - A Michael Nee
-        - A Nick Blanock
-        - A Nuzhat Minhaz
-        - A Phuong Anh Nguyen
+        - ABillDemirkapi
+        - AConnorJackson
+        - ADanBenedetti
+        - ADennisPalad
+        - AJacobRoss
+        - AJamesHassel
+        - AKeiraCarrington
+        - AMichaelNee
+        - ANickBlanock
+        - ANuzhatMinhaz
+        - APhuongAnhNguyen
 
   tasks:
     - name: Configure standard '{{ users.standard }}' account
