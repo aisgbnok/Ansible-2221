@@ -174,8 +174,9 @@ all:
         b1_threestars_iis:
 
     b1_windows:
-      b1_local_windows:
-      b1_cloud_windows:
+      children:
+        b1_local_windows:
+        b1_cloud_windows:
 
 # --- Blue Team 2
 
@@ -213,8 +214,9 @@ all:
         b2_threestars_iis:
 
     b2_windows:
-      b2_local_windows:
-      b2_cloud_windows:
+      children:
+        b2_local_windows:
+        b2_cloud_windows:
 
 # -------------------------------
 # -------- Global Groups --------
