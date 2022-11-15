@@ -237,7 +237,7 @@ all:
         b1_linux:
         b2_linux:
 
-# --- ALl Windows
+# --- All Windows
 
     windows_servers:
       children:
