@@ -57,7 +57,8 @@
 
     - name: Ensure SSH Package is Present
       package:
-        name
+        name: ssh
+        state: present
 
 - name: Setup Blue Windows Accounts and Passwords
   hosts: windows
