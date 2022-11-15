@@ -262,3 +262,6 @@ all:
       children:
         b1_windows:
         b2_windows:
+      vars:
+        ansible_connection: ssh
+        ansible_shell_type: cmd
