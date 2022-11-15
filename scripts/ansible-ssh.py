@@ -52,4 +52,13 @@ if __name__ == '__main__':
         windows_ssh(user, ip)
 
     else:
-        windows_ssh("")
+        windows_ssh("bruh", "10.1.7.7")
+        windows_ssh("bruh", "10.2.7.7")
+        windows_ssh("bruh", "10.1.6.2")
+        windows_ssh("bruh", "10.2.6.2")
+        windows_ssh("bruh", "10.1.6.3")
+        windows_ssh("bruh", "10.2.6.3")
+        windows_ssh("bruh", "10.1.6.4")
+        windows_ssh("bruh", "10.2.6.4")
+        windows_ssh("bruh", "10.1.6.5")
+        windows_ssh("bruh", "10.2.6.5")
