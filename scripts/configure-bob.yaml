@@ -1,0 +1,15 @@
+- name: Setup Bob
+  hosts: windows
+  vars:
+    password:
+      default: comp3thebest
+
+  tasks:
+    - name: Configure administrator Bob account
+      win_user:
+        fullname: "Bob"
+        name: "bob"
+        password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+        groups:
+          - Administrators
+          - Users
