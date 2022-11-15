@@ -12,26 +12,44 @@ import subprocess
 user = "Administrator"
 ip = "10.1.4.7"
 
+
+def windows_ssh(user, ip):
+    print(f'\n\n{"":-^48}')
+    print(f'{f" {user}@{ip} ":-^48}')
+    print(f'{"":-^48}')
+
+    subprocess.run(
+        ' '.join(['sudo', 'scp', '~/.ssh/id_rsa.pub', f'{user}@{ip}:/ProgramData/ssh/administrators_authorized_keys']),
+        shell=True)
+
+    print(f"Setting permissions for '{user}@{ip}'...")
+    subprocess.run(' '.join(['sudo', 'ssh', f'{user}@{ip}',
+                             '\'icacls.exe "C:\ProgramData\ssh\\administrators_authorized_keys" /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"\'']),
+                   shell=True)
+
+    subprocess.run(' '.join(['sudo', 'ssh', f'{user}@{ip}',
+                             '\'icacls "C:\ProgramData\ssh\\administrators_authorized_keys" /remove "NT AUTHORITY\Authenticated Users"\'']),
+                   shell=True)
+
+    subprocess.run(' '.join(['sudo', 'ssh', f'{user}@{ip}',
+                             '\'icacls "C:\ProgramData\ssh\\administrators_authorized_keys" /inheritance:r\'']),
+                   shell=True)
+
+
+def main():
+    print("Welcome to ")
+
 # Only if this file is run directly
 if __name__ == '__main__':
-    while True:
-        user = input("Enter the username: ")
-        ip = input("Enter the IP address: ")
+    print("Welcome, this configures SSH keys for Windows.")
+    print("It's not pretty, unfortunately.")
 
-        print(f"Installing SSH key for '{user}@{ip}'...")
-        subprocess.run(
-            ' '.join(['sudo', 'scp', '~/.ssh/id_rsa.pub', f'{user}@{ip}:/ProgramData/ssh/administrators_authorized_keys']),
-            shell=True)
+    option = input("1) Manual 2) Auto").strip()
 
-        print(f"Setting permissions for '{user}@{ip}'...")
-        subprocess.run(' '.join(['sudo', 'ssh', f'{user}@{ip}',
-                                 '\'icacls.exe "C:\ProgramData\ssh\\administrators_authorized_keys" /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"\'']),
-                       shell=True)
+    if option == "1":
+        user = input("Enter the username: ").strip()
+        ip = input("Enter the IP address: ").strip()
+        windows_ssh(user, ip)
 
-        subprocess.run(' '.join(['sudo', 'ssh', f'{user}@{ip}',
-                                 '\'icacls "C:\ProgramData\ssh\\administrators_authorized_keys" /remove "NT AUTHORITY\Authenticated Users"\'']),
-                       shell=True)
-
-        subprocess.run(' '.join(['sudo', 'ssh', f'{user}@{ip}',
-                                 '\'icacls "C:\ProgramData\ssh\\administrators_authorized_keys" /inheritance:r\'']),
-                       shell=True)
+    else:
+        windows_ssh("")
