@@ -265,3 +265,4 @@ all:
       vars:
         ansible_connection: ssh
         ansible_shell_type: cmd
+        ansible_user: bruh
