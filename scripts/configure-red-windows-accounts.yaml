@@ -32,17 +32,17 @@
   tasks:
     - name: Configure standard '{{ users.standard }}' account
       win_user:
-        fullname: "{{ users.standard }}"
-        name: "{{ users.standard }}"
+        fullname: "{{ item }}"
+        name: "{{ item }}"
         password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
-      loop: "{{ users }}"
+      loop: "{{ users.standard }}"
 
     - name: Configure administrator '{{ users.admin }}' account
       win_user:
-        fullname: "{{ users.admin }}"
-        name: "{{ users.admin }}"
+        fullname: "{{ item }}"
+        name: "{{ item }}"
         password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
         groups:
           - Administrators
           - Users
-      loop: "{{ users }}"
+      loop: "{{ users.admin }}"
