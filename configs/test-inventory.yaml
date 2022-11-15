@@ -17,19 +17,19 @@ all:
     tbl_executive_pcs:
       hosts:
         b1_tbl_executive_pc:
-          ansible_host: 10.1.6.3
+          ansible_host: 192.168.201.50
 
     # Two Blue NetServices - Windows Server 2022 (20348)
     tbl_netservs:
       hosts:
         b1_tbl_netserv:
-          ansible_host: 10.1.6.4
+          ansible_host: 192.168.204.152
 
     # Two Blue Linux - Ubuntu 22.04 Desktop
     tbl_linuxs:
       hosts:
         b1_tbl_linux:
-          ansible_host: 10.1.6.7
+          ansible_host: 192.168.200.83
 
     # -------------------------------
     # --------- Team Groups ---------
@@ -82,3 +82,6 @@ all:
     windows:
       children:
         b1_windows:
+      vars:
+        ansible_connection: ssh
+        ansible_shell_type: cmd
