@@ -1,0 +1,84 @@
+---
+# TEST
+# CDT-2221 Alpha Red Team
+# Anthony Swierkosz; ajs2576
+# Ansible Control Node inventory file for global SSH control over blue team managed nodes.
+
+all:
+  children:
+
+    # -------------------------------
+    # ------------ Hosts ------------
+    # -------------------------------
+
+    # --- Two Blue Local Network
+
+    # Executive PC - Windows 10 Enterprise 21H2
+    tbl_executive_pcs:
+      hosts:
+        b1_tbl_executive_pc:
+          ansible_host: 10.1.6.3
+
+    # Two Blue NetServices - Windows Server 2022 (20348)
+    tbl_netservs:
+      hosts:
+        b1_tbl_netserv:
+          ansible_host: 10.1.6.4
+
+    # Two Blue Linux - Ubuntu 22.04 Desktop
+    tbl_linuxs:
+      hosts:
+        b1_tbl_linux:
+          ansible_host: 10.1.6.7
+
+    # -------------------------------
+    # --------- Team Groups ---------
+    # -------------------------------
+
+    # --- Blue Team 1
+
+    # Linux
+    b1_local_linux:
+      hosts:
+        b1_tbl_linux:
+
+    b1_linux:
+      children:
+        b1_local_linux:
+
+    # Windows
+    b1_local_windows:
+      hosts:
+        b1_tbl_executive_pc:
+        b1_tbl_netserv:
+
+    b1_windows:
+      b1_local_windows:
+
+    # -------------------------------
+    # -------- Global Groups --------
+    # -------------------------------
+
+    # --- ALl Linux
+
+    linux_locals:
+      children:
+        b1_local_linux:
+
+    linux:
+      children:
+        b1_linux:
+
+    # --- All Windows
+
+    windows_servers:
+      children:
+        tbl_netservs:
+
+    windows_locals:
+      children:
+        b1_local_windows:
+
+    windows:
+      children:
+        b1_windows:
