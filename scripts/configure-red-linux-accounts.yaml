@@ -38,17 +38,17 @@
   tasks:
     - name: Configure standard '{{ users.standard }}' account
       user:
-        name: "{{ users.standard }}"
+        name: "{{ item }}"
         password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
-      loop: "{{ users }}"
+      loop: "{{ users.standard }}"
 
 
     - name: Configure administrator '{{ users.admin }}' account
       user:
-        name: "{{ users.admin }}"
+        name: "{{ item }}"
         password: "{{ password.default | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
         group: "{{ 'wheel' if ansible_facts['distribution'] == 'CentOS' else 'sudo' }}"
-      loop: "{{ users }}"
+      loop: "{{ users.admin }}"
 
     - name: Ensure Sudo Package is Present
       package:
