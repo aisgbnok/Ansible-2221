@@ -238,6 +238,8 @@ all:
       children:
         b1_linux:
         b2_linux:
+      vars:
+        ansible_user: bruh
 
 # --- All Windows
 
